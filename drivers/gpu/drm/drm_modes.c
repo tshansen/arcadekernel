@@ -1111,6 +1111,7 @@ bool drm_mode_parse_command_line_for_connector(const char *mode_option,
 	bool interlace = false, margins = false, was_digit = false;
 	int i;
 	enum drm_connector_force force = DRM_FORCE_UNSPECIFIED;
+	bool c15khz;
 
 #ifdef CONFIG_FB
 	if (!mode_option)
@@ -1200,6 +1201,9 @@ bool drm_mode_parse_command_line_for_connector(const char *mode_option,
 
 			force = DRM_FORCE_OFF;
 			break;
+		case 'c':
+			c15khz = true;
+			break;
 		default:
 			goto done;
 		}
@@ -1245,6 +1249,8 @@ done:
 	mode->interlace = interlace;
 	mode->margins = margins;
 	mode->force = force;
+	mode->c15khz = c15khz;
+	connector->c15khz = c15khz;
 
 	return true;
 }

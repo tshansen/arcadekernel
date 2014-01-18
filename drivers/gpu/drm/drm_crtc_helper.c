@@ -154,6 +154,9 @@ int drm_helper_probe_single_connector_modes(struct drm_connector *connector,
 		goto prune;
 	}
 
+	if (connector->c15khz)
+		goto prune;
+
 #ifdef CONFIG_DRM_LOAD_EDID_FIRMWARE
 	count = drm_load_edid_firmware(connector);
 	if (count == 0)

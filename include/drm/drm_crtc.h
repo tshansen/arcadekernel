@@ -618,6 +618,7 @@ struct drm_connector {
 	enum drm_connector_force force;
 	uint32_t encoder_ids[DRM_CONNECTOR_MAX_ENCODER];
 	struct drm_encoder *encoder; /* currently active encoder */
+	bool c15khz;
 
 	/* EDID bits */
 	uint8_t eld[MAX_ELD_BYTES];
@@ -1073,6 +1074,8 @@ extern int drm_add_modes_noedid(struct drm_connector *connector,
 extern int drm_edid_header_is_valid(const u8 *raw_edid);
 extern bool drm_edid_block_valid(u8 *raw_edid, int block, bool print_bad_edid);
 extern bool drm_edid_is_valid(struct edid *edid);
+struct drm_display_mode *drm_mode_find_c15khz(struct drm_device *dev,
+					   int hsize, int vsize, int fresh);
 struct drm_display_mode *drm_mode_find_dmt(struct drm_device *dev,
 					   int hsize, int vsize, int fresh,
 					   bool rb);
